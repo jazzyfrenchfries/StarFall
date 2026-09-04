@@ -1,13 +1,18 @@
 package entities;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.TileObserver;
+
 import javax.imageio.ImageIO;
 import java.io.IOException;
+
+import world.Map;
 
 
 public class Player {
     private int x;
     private int y;
+    private final int TILE_SIZE = 32;
     
     public Player(int x, int y){
         this.x = x;
@@ -17,16 +22,36 @@ public class Player {
     public void draw(Graphics2D g2) {
         g2.fillRect(x, y, 32,32);
     }
-    public void moveUp(){
-        y -= 5;
+    public void moveUp(Map map){
+        int newY = y -5;
+        int row = newY / TILE_SIZE;
+        int col = x/ TILE_SIZE;
+        if(map.isWalkable(row, col)){
+            y = newY;
+        }
     }
-    public void moveDown(){
-        y+= 5;
+    public void moveDown(Map map){
+        int newY = y + 5;
+        int row = newY / TILE_SIZE;
+        int col = x / TILE_SIZE;
+        if(map.isWalkable(row,col)){
+            y = newY;
+        }
     }
-    public void moveLeft(){
-        x-= 5;
+    public void moveLeft(Map map){
+        int newX = x - 5;
+        int row = y / TILE_SIZE;
+        int col = newX / TILE_SIZE;
+        if(map.isWalkable(row, col)){
+            x= newX;
+        }
     }
-    public void moveRight(){
-        x += 5;
+    public void moveRight(Map map){
+        int newX = x +5;
+        int row = y / TILE_SIZE;
+        int col = newX / TILE_SIZE;
+        if(map.isWalkable(row, col)){
+            x = newX;
+        }
     }
 }
