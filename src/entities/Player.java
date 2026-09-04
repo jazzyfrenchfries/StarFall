@@ -19,8 +19,8 @@ public class Player {
         this.y = y;
     }
 
-    public void draw(Graphics2D g2) {
-        g2.fillRect(x, y, 32,32);
+    public void draw(Graphics2D g2,int cameraX, int cameraY) {
+        g2.fillRect(x - cameraX, y - cameraY, 32,32);
     }
     public void moveUp(Map map){
         int newY = y -5;
@@ -53,5 +53,11 @@ public class Player {
         if(map.isWalkable(row, col)){
             x = newX;
         }
+    }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
 }

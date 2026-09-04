@@ -13,6 +13,9 @@ public class GamePanel extends JPanel implements KeyListener{
     private Player player;
     private Map map;
 
+    private int cameraX;
+    private int cameraY;
+
     public GamePanel(){
         setPreferredSize(new Dimension(800, 600));
         
@@ -25,11 +28,14 @@ public class GamePanel extends JPanel implements KeyListener{
     
     @Override
     protected void paintComponent(Graphics g){
+        cameraX = player.getX() - getWidth() / 2;
+        cameraY = player.getY() - getHeight() / 2;
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        map.draw(g2);
-        player.draw(g2);
+        map.draw(g2,cameraX,cameraY);
+        player.draw(g2,cameraX,cameraY);
     }
+    
     @Override
     public void keyTyped(KeyEvent k){
 
