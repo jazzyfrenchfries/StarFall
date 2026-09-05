@@ -17,7 +17,7 @@ public class Map {
     "#.............######.........#".toCharArray(),
     "#.............#....#.........#".toCharArray(),
     "#.............#....#.........#".toCharArray(),
-    "#.............######.........#".toCharArray(),
+    "#.............##-###.........#".toCharArray(),
     "#............................#".toCharArray(),
     "#............................#".toCharArray(),
     "#............................#".toCharArray(),
@@ -32,15 +32,18 @@ public class Map {
 };
     private BufferedImage grass;
     private BufferedImage wall;
+    private BufferedImage door;
     private final int TILE_SIZE = 32;
 
 
     public Map(){
         File grassFile = new File("assets/grass.png");
         File wallFile = new File("assets/wall.png");
+        File doorFile = new File("assets/door.png");
         try{
             grass = ImageIO.read(grassFile);
             wall = ImageIO.read(wallFile);
+            door = ImageIO.read(doorFile);
         }       
         catch (IOException e) {
             e.printStackTrace();
@@ -63,6 +66,16 @@ public class Map {
                 if(tile == '.'){
                     g2.drawImage(
                         grass,
+                        col * TILE_SIZE - cameraX,
+                        row * TILE_SIZE - cameraY,
+                        TILE_SIZE,
+                        TILE_SIZE,
+                        null
+                    );
+                }
+                if(tile == '-'){
+                    g2.drawImage(
+                        door,
                         col * TILE_SIZE - cameraX,
                         row * TILE_SIZE - cameraY,
                         TILE_SIZE,
